@@ -27,7 +27,7 @@ export const TableCell = ({
     background:
       isHoveredSum && !isSumCell
         ? `rgba(0, 255, 0, ${value / Math.max(rowSum, 1)})`
-        : "",
+        : undefined,
   };
 
   return (

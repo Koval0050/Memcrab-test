@@ -5,12 +5,14 @@ import {
   handleCellClick,
   handleRowDelete,
 } from "@/utils/tableUtils";
+import { Cell } from "@/types/cell";
 
 import { TableCell } from "./TableCell";
+
 import { Button } from "../ui/Button";
 
 interface TableRowProps {
-  row: number[];
+  row: Cell[];
   rowIdx: number;
   highlightedCells: { rowIdx: number; colIdx: number }[];
   hoveredSumIdx: number | null;
@@ -37,8 +39,8 @@ export const TableRow = ({
 
       {row.map((cell, colIdx) => (
         <TableCell
-          key={colIdx}
-          value={cell}
+          key={cell.id}
+          value={cell.amount}
           rowSum={rowSum}
           isHighlighted={highlightedCells.some(
             (highlightedCell) =>
@@ -51,6 +53,7 @@ export const TableRow = ({
           onLeave={onCellLeave}
         />
       ))}
+
       <td
         className="table-view__cell table-view__cell--sum"
         onMouseEnter={() => onSumHover(rowIdx)}

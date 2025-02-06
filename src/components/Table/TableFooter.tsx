@@ -4,7 +4,7 @@ export const TableFooter = () => {
   const { data } = useTableContext();
 
   const calculateColumnFiftyPercent = (colIndex: number) => {
-    const columnSum = data.reduce((sum, row) => sum + row[colIndex], 0);
+    const columnSum = data.reduce((sum, row) => sum + row[colIndex].amount, 0);
     return columnSum * 0.5;
   };
 
@@ -14,8 +14,8 @@ export const TableFooter = () => {
         <td className="table-view__cell table-view__cell--bold">
           50th percentile
         </td>
-        {data[0].map((_, colIdx) => (
-          <td key={colIdx} className="table-view__cell table-view__cell--bold">
+        {data[0]?.map((cell, colIdx) => (
+          <td key={cell.id} className="table-view__cell table-view__cell--bold">
             {calculateColumnFiftyPercent(colIdx)}
           </td>
         ))}

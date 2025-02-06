@@ -1,12 +1,17 @@
 import { createContext, Dispatch, SetStateAction, useContext } from "react";
 
+interface TableCell {
+  id: string;
+  amount: number;
+}
+
 interface TableContextType {
   rows: number;
   cols: number;
-  data: number[][];
+  data: TableCell[][];
   setRows: Dispatch<SetStateAction<number>>;
   setCols: Dispatch<SetStateAction<number>>;
-  setData: Dispatch<SetStateAction<number[][]>>;
+  setData: Dispatch<SetStateAction<TableCell[][]>>;
   generateTable: () => void;
 }
 

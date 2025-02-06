@@ -22,10 +22,13 @@ export const TableCell = ({
   onLeave,
 }: TableCellProps) => {
   const percentage = calculatePercentage(value, rowSum);
-  const cellStyle =
-    isHoveredSum && !isSumCell
-      ? { background: `rgba(0, 255, 0, ${value / Math.max(rowSum, 1)})` }
-      : {};
+
+  const cellStyle = {
+    background:
+      isHoveredSum && !isSumCell
+        ? `rgba(0, 255, 0, ${value / Math.max(rowSum, 1)})`
+        : "",
+  };
 
   return (
     <td

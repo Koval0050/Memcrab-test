@@ -29,7 +29,7 @@ export const TableBody = () => {
     <tbody>
       {data.map((row, rowIdx) => (
         <TableRow
-          key={rowIdx}
+          key={row[0].id} 
           row={row}
           rowIdx={rowIdx}
           highlightedCells={highlightedCells}
@@ -46,9 +46,10 @@ export const TableBody = () => {
             Add New Row
           </Button>
         </td>
-        {data[0].map((_, colIdx) => (
-          <td key={colIdx} className="table-view__cell"></td>
+        {data[0]?.map((cell) => (
+          <td key={cell.id} className="table-view__cell"></td>
         ))}
+        
         <td className="table-view__cell"></td>
       </tr>
     </tbody>

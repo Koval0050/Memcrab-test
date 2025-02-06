@@ -1,14 +1,11 @@
-import React from "react";
+import { PropsWithChildren } from "react";
 
 type Props = {
-  children: React.ReactNode;
-  onClick: () => void;
+  onClick: VoidFunction;
 };
 
-export const Button = ({ children, onClick }: Props) => {
-  return (
-    <button className="table-view__controls-button" onClick={onClick}>
-      {children}
-    </button>
-  );
-};
+export const Button = ({ children, onClick }: PropsWithChildren<Props>) => (
+  <button className="table-view__controls-button" onClick={onClick}>
+    {children}
+  </button>
+);

@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, PropsWithChildren } from "react";
 import { TableContext } from "./TableContext";
 
 const MAX_ROWS = 100;
 const MAX_COLS = 100;
 
-const TableProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+const TableProvider = ({ children }: PropsWithChildren) => {
   const [rows, setRows] = useState<number>(0);
   const [cols, setCols] = useState<number>(0);
   const [data, setData] = useState<number[][]>([]);

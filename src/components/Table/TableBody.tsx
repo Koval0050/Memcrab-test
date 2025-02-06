@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useTableContext } from "@/context/TableContext";
 import { Button } from "@/components/ui/Button";
 import { getClosestCells, handleAddRow } from "@/utils/tableUtils";
@@ -12,24 +12,30 @@ export const TableBody = () => {
   const [hoveredSumIdx, setHoveredSumIdx] = useState<number | null>(null);
   const highlightedCellsCount = Math.floor((rows + cols) / 2);
 
-  const handleCellHover = (rowIdx: number, colIdx: number) => {
-    setHighlightedCells(
-      getClosestCells(rowIdx, colIdx, data, highlightedCellsCount)
-    );
-  };
+  const handleCellHover = useCallback(
+    (rowIdx: number, colIdx: number) => {
+      setHighlightedCells(
+        getClosestCells(rowIdx, colIdx, data, highlightedCellsCount)
+      );
+    },
+    [data, highlightedCellsCount]
+  );
 
-  const handleCellLeave = () => {
+  const handleCellLeave = useCallback(() => {
     setHighlightedCells([]);
     setHoveredSumIdx(null);
-  };
+  }, []);
 
-  const handleSumHover = (rowIdx: number) => setHoveredSumIdx(rowIdx);
+  const handleSumHover = useCallback(
+    (rowIdx: number) => setHoveredSumIdx(rowIdx),
+    []
+  );
 
   return (
     <tbody>
       {data.map((row, rowIdx) => (
         <TableRow
-          key={row[0].id} 
+          key={row[0].id}
           row={row}
           rowIdx={rowIdx}
           highlightedCells={highlightedCells}
@@ -49,7 +55,7 @@ export const TableBody = () => {
         {data[0]?.map((cell) => (
           <td key={cell.id} className="table-view__cell"></td>
         ))}
-        
+
         <td className="table-view__cell"></td>
       </tr>
     </tbody>
